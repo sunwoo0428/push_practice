@@ -3,6 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="default_bg">#FFFFFF</color>
-    <color name="textBlack">#000000</color>
+
+    <color name="transparent_background">#00FF0000</color>
+    <color name="graphcolor">#000000</color>
+
 </resources>

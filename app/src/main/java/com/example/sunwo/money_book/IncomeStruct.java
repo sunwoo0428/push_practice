@@ -58,6 +58,8 @@ public class IncomeStruct {
         this.method = method;
         this.description = description;
     }
+
     public IncomeStruct() {
     }
+
 }

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TabHost;
 
+
 public class MainActivity extends TabActivity {
 
     public static Context context;

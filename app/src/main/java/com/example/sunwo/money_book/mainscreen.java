@@ -46,7 +46,6 @@ public class mainscreen extends AppCompatActivity {
 
         ListView listview ;
         final ListViewAdapterEx adapter;
-
         final TextView testing = (TextView)findViewById(R.id.notyet1);
         typeselected = (TextView)findViewById(R.id.type1);
         start_date = (TextView)findViewById(R.id.start_date);

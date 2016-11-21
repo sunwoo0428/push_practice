@@ -11,10 +11,11 @@ import java.util.Locale;
 
 public class DBExpense extends SQLiteOpenHelper {
 
-   public ExpenseStruct[] expenseStructs = new ExpenseStruct[100];
-    public String[] days7db = new String[6];
+
+    public ExpenseStruct[] expenseStructs = new ExpenseStruct[100];
+    public String[] days7db = new String[7];
     public String[] days7graph = new String[9];
-//    public String mergePractice ="";
+
 
 
     public DBExpense(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -23,8 +24,7 @@ public class DBExpense extends SQLiteOpenHelper {
 
 
     public void onCreate(SQLiteDatabase db) {
-        // 새로운 테이블을 생성한다.
-        // cr)eate table 테이블명 (컬럼명 타입 옵션;
+
         db.execSQL("CREATE TABLE MONEY_EX( _id INTEGER PRIMARY KEY AUTOINCREMENT, expense INTEGER, category TEXT, " +
                 "date INTEGER, paymentMethod TEXT, description TEXT);");
     }
@@ -85,9 +85,11 @@ public class DBExpense extends SQLiteOpenHelper {
         for(int i=0; i<expenseStructs.length; i++){
             expenseStructs[i] = new ExpenseStruct();
         }
-       while(cursor.moveToNext()){
-           String tempAmount = String.valueOf(cursor.getInt(1));
-           String tempDate = String.valueOf(cursor.getInt(3));
+
+        while(cursor.moveToNext()){
+            String tempAmount = String.valueOf(cursor.getInt(1));
+            String tempDate = String.valueOf(cursor.getInt(3));
+
             expenseStructs[count].setAmount(tempAmount);
             expenseStructs[count].setCategory(cursor.getString(2));
             expenseStructs[count].setDate(tempDate);
@@ -109,29 +111,54 @@ public class DBExpense extends SQLiteOpenHelper {
         return totalExpense;
     }
 
-    public void get7DaysAgoDb(int year , int month , int day) {
-        for(int i = 6;i>0;i--){
+
+    public int GetTotalExpenseCategorized(String selectedDate,String category){
+        SQLiteDatabase db = getReadableDatabase();
+        int totalExpense = 0;
+        int dateInt = Integer.parseInt(selectedDate);
+        Cursor cursor = db.rawQuery("select expense from MONEY_EX where date ="+dateInt+" and category ='"+category+"'", null);
+        while(cursor.moveToNext()){
+            totalExpense += cursor.getInt(0);
+        }
+        return totalExpense;
+    }
+
+
+
+    public void get7DaysAgoDb(int year , int month , int day,int k) {
+        for(int i = 6;i>=0;i--){
             Calendar cal = Calendar
                     .getInstance();
             cal.set(year, month-1, day);
-            cal.add(Calendar.DATE, -i);
+            cal.add(Calendar.DATE, -i-7*k+1);
+
             java.util.Date weekago = cal.getTime();
             SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd",
                     Locale.getDefault());
             days7db[6-i] = formatter.format(weekago);
         }
     }
-    public void get7DaysAgoGraph(int year , int month , int day) {
+
+    public void get7DaysAgoGraph(int year , int month , int day,int k) {
+        for (int i=0;i<9;i++)
+            days7graph[i]= new String();
+
         for(int i = 6;i>=0;i--){
             Calendar cal = Calendar
                     .getInstance();
             cal.set(year, month-1, day);
-            cal.add(Calendar.DATE, -i);
+
+            cal.add(Calendar.DATE, -i-7*k+1);
+
             java.util.Date weekago = cal.getTime();
             SimpleDateFormat formatter = new SimpleDateFormat("MM/dd",
                     Locale.getDefault());
             days7graph[7-i] = formatter.format(weekago);
         }
+
+        days7graph[0]="";
+        days7graph[8]="";
+
     }
 
  /*   public int GetWeekExpense(){
