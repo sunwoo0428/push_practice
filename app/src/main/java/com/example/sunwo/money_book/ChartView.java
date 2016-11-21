@@ -76,7 +76,7 @@ public class ChartView extends View {
 
         CategorySeries series = new CategorySeries("계열 타이틀");
         DefaultRenderer renderer = new DefaultRenderer();
-
+//asdasdadasdasdasd
         renderer.setShowLabels(true);
         renderer.setLegendTextSize(30); //凡例の文字サイズ
         renderer.setShowLegend(false);
