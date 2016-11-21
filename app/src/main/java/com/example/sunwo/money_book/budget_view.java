@@ -17,6 +17,8 @@ public class budget_view extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_budget_view);
 
+        //testing commit
+
 
 
         final DBBudget dbBudget = new DBBudget(getApplicationContext(), "money_bdg.db", null, 1);
