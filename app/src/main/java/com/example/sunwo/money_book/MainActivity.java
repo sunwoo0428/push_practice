@@ -1,5 +1,5 @@
 package com.example.sunwo.money_book;
-
+// 시니린 branch
 import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Context;
