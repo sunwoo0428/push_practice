@@ -36,8 +36,9 @@ public class budget_new extends AppCompatActivity {
                 else{
                     Date currentTime = new Date( );
                     int now = dbBudget.DatetoInt(currentTime);
-
                     dbBudget.insert("insert into MONEY_BUD values(null, "+budget+", "+period+", "+now+", "+0+", "+0+");");
+                    int recommend = Integer.parseInt(budget)/Integer.parseInt(period);
+                    dbBudget.update("update MONEY_BUD set recommend = " + recommend + " where _id = " + 2 + ";");
                     Intent intent = new Intent(budget_new.this, MainActivity.class);
                     startActivity(intent);
                 }

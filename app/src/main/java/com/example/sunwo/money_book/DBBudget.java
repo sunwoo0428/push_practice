@@ -71,7 +71,7 @@ public class DBBudget extends SQLiteOpenHelper {
         cursor.moveToNext();
         cursor.moveToNext();
             str =  " Recommended usage = "
-                    + cursor.getInt(1)/cursor.getInt(2) + "\n";
+                    + cursor.getInt(5) + "\n";
         return str;
     }
 
