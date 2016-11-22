@@ -60,7 +60,7 @@ public class DBBudget extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("select * from MONEY_BUD", null);
         cursor.moveToNext();
         cursor.moveToNext();
-        str =  " 총 남은 돈 = "+ cursor.getInt(1) + "\n";
+        str =  " 총 남은 돈 : "+ cursor.getInt(1) + " 원\n";
         return str;
     }
     public String PrintDataRecommend() {
@@ -70,8 +70,8 @@ public class DBBudget extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("select * from MONEY_BUD", null);
         cursor.moveToNext();
         cursor.moveToNext();
-            str =  " 오늘의 돈 = "
-                    + cursor.getInt(5) + "\n";
+            str =  " 오늘의 돈 : "
+                    + cursor.getInt(5) + " 원\n";
         return str;
     }
 
