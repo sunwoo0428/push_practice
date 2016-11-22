@@ -87,9 +87,11 @@ public class DBExpense extends SQLiteOpenHelper {
         }
 
         while(cursor.moveToNext()){
+            String tempId = String.valueOf(cursor.getInt(0));
             String tempAmount = String.valueOf(cursor.getInt(1));
             String tempDate = String.valueOf(cursor.getInt(3));
 
+            expenseStructs[count].setId(tempId);
             expenseStructs[count].setAmount(tempAmount);
             expenseStructs[count].setCategory(cursor.getString(2));
             expenseStructs[count].setDate(tempDate);

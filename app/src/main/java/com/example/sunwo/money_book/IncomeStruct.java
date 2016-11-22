@@ -4,6 +4,7 @@ package com.example.sunwo.money_book;
  * Created by sunwo on 2016-11-17.
  */
 public class IncomeStruct {
+    public String id = "";
     public String amount = "";
     public String date = "";
     public String category = "";
@@ -28,6 +29,14 @@ public class IncomeStruct {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getAmount() {

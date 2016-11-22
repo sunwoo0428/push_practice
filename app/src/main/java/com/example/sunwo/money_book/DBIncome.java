@@ -46,6 +46,7 @@ public class DBIncome extends SQLiteOpenHelper {
         db.execSQL(_query);
         db.close();
     }
+
     public void drop(String _query){
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL(_query);
@@ -83,8 +84,10 @@ public class DBIncome extends SQLiteOpenHelper {
             incomeStructs[i] = new IncomeStruct();
         }
         while(cursor.moveToNext()){
+            String tempId = String.valueOf(cursor.getInt(0));
             String tempAmount = String.valueOf(cursor.getInt(1));
             String tempDate = String.valueOf(cursor.getInt(3));
+            incomeStructs[count].setId(tempId);
             incomeStructs[count].setAmount(tempAmount);
             incomeStructs[count].setCategory(cursor.getString(2));
             incomeStructs[count].setDate(tempDate);

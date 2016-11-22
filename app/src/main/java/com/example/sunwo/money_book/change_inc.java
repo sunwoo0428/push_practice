@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class cat_inc extends AppCompatActivity {
+public class change_inc extends AppCompatActivity {
 
     EditText Des;
     final int DIALOG_DATE = 1;
@@ -35,21 +35,23 @@ public class cat_inc extends AppCompatActivity {
     int inDay = 0;
     String CurrentDate = "";
     int curryear = 0, currmonth=0,currday=0;
+    String id = "";
+    EditText changedMoney;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cat_inc);
+        setContentView(R.layout.activity_change_inc);
+
+        Intent intent = getIntent();
+        id = (String)intent.getSerializableExtra("i_id");
 
         final DBIncome dbIncome = new DBIncome(getApplicationContext(),"money_in.db",null,1);
 
         Des = (EditText) findViewById(R.id.et_description);
 
-        Intent intent = getIntent();
-        amount = (String)intent.getSerializableExtra("amount");
+        changedMoney = (EditText) findViewById(R.id.et_amount);
 
-        final TextView inResult = (TextView) findViewById(R.id.testingresult);
-        inResult.setText(amount); // data 넘어가는지 연습
 
         Button inDate = (Button) findViewById(R.id.btn_inDate);
         inDate.setOnClickListener(new View.OnClickListener() {
@@ -84,11 +86,13 @@ public class cat_inc extends AppCompatActivity {
         Button btnInsertIn = (Button) findViewById(R.id.btn_inInsert);
         btnInsertIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                    dbIncome.insert("insert into MONEY_IN values(null, " + amount + ", '" + inCategory + "',"
-                            + dateInt + ", '"+inMethod+"' , '"+inDescription+"');");
-                    inResult.setText(dbIncome.PrintData());
+                dbIncome.update("update MONEY_IN set income='"+changedMoney.getText().toString()+"' where _id ='"+id+"';");
+                dbIncome.update("update MONEY_IN set category='"+inCategory+"' where _id ='"+id+"';");
+                dbIncome.update("update MONEY_IN set date="+dateInt+" where _id ='"+id+"';");
+                dbIncome.update("update MONEY_IN set incomeMethod='"+inMethod+"' where _id ='"+id+"';");
+                dbIncome.update("update MONEY_IN set description='"+inDescription+"' where _id ='"+id+"';");
                 onBackPressed();
-                }
+            }
         });
 
         Button btnInClose = (Button)findViewById(R.id.btn_inReturn);
@@ -103,7 +107,7 @@ public class cat_inc extends AppCompatActivity {
 
     private void DialogSelectOptionIn() {
         final String items[] = { "미등록", "월급", "용돈", "꽁돈" };
-        AlertDialog.Builder ab = new AlertDialog.Builder(cat_inc.this);
+        AlertDialog.Builder ab = new AlertDialog.Builder(change_inc.this);
         ab.setTitle("카테고리");
         ab.setSingleChoiceItems(items, 0,
                 new DialogInterface.OnClickListener() {
@@ -126,7 +130,7 @@ public class cat_inc extends AppCompatActivity {
 
     private void DialogSelectOptionPayIn() {
         final String items[] = { "미등록", "카드", "현금", "통장" };
-        AlertDialog.Builder ab = new AlertDialog.Builder(cat_inc.this);
+        AlertDialog.Builder ab = new AlertDialog.Builder(change_inc.this);
         ab.setTitle("카테고리");
         ab.setSingleChoiceItems(items, 0,
                 new DialogInterface.OnClickListener() {
@@ -154,7 +158,7 @@ public class cat_inc extends AppCompatActivity {
         curryear = Integer.parseInt(CurrentDate.substring(0,4));
         currmonth = Integer.parseInt(CurrentDate.substring(4,6));
         currday = Integer.parseInt(CurrentDate.substring(6,8));
-        DatePickerDialog dpd = new DatePickerDialog(cat_inc.this, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog dpd = new DatePickerDialog(change_inc.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 //                Toast.makeText(getApplicationContext(),year+"년 "+(monthOfYear+1)+"월 "+dayOfMonth+ "일", Toast.LENGTH_SHORT).show();

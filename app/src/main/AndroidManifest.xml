@@ -8,7 +8,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".MainActivity" />
         <activity android:name=".inc_exp" />
         <activity android:name=".statistic" />
@@ -27,7 +26,9 @@
         <activity android:name=".budget_view" />
         <activity android:name=".cat_exp" />
         <activity android:name=".cat_inc" />
-        <activity android:name=".temp"></activity>
+        <activity android:name=".temp" />
+        <activity android:name=".change_exp" />
+        <activity android:name=".change_inc"></activity>
     </application>
 
 </manifest>
