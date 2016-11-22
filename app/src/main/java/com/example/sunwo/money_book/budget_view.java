@@ -58,4 +58,6 @@ public class budget_view extends AppCompatActivity {
             recResult.setText( dbBudget.PrintDataRecommend() );
         }
     }
+
+
 }
