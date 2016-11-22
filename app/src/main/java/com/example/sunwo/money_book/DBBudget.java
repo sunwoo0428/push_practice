@@ -5,6 +5,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class DBBudget extends SQLiteOpenHelper {
 
     public DBBudget(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -102,20 +106,23 @@ public class DBBudget extends SQLiteOpenHelper {
         }
     }
 
-    public String PrintDataTesting() {
+    public int getRecommend() {
         SQLiteDatabase db = getReadableDatabase();
-        String str = "";
+        int recommend = 0;
 
         Cursor cursor = db.rawQuery("select * from MONEY_BUD", null);
-        while(cursor.moveToNext()) {
-            str += cursor.getInt(0)
-                    + " : bid "
-                    + cursor.getInt(1)
-                    + ", budget = "
-                    + cursor.getInt(2)
-                    + ", period = "
-                    + "\n";
-        }
-        return str;
+        cursor.moveToNext();
+        cursor.moveToNext();
+        recommend = cursor.getInt(5);
+        return recommend;
     }
+
+    public int DatetoInt(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+        String dTime = formatter.format(date);
+        int result = Integer.parseInt(dTime);
+
+        return result;
+    }
+
 }

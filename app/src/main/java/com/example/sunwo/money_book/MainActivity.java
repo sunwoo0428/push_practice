@@ -1,5 +1,5 @@
 package com.example.sunwo.money_book;
-// 시니린 branch
+
 import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Context;
@@ -9,7 +9,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TabHost;
-
 
 public class MainActivity extends TabActivity {
 
@@ -60,8 +59,9 @@ public class MainActivity extends TabActivity {
                 dbIncome.createTable("CREATE TABLE MONEY_IN( _id INTEGER PRIMARY KEY AUTOINCREMENT, income INTEGER, category TEXT," +
                         " date INTEGER, paymentMethod TEXT, description TEXT);");
                 dbBudget.drop("DROP TABLE IF EXISTS MONEY_BUD");
-                dbBudget.createTable("CREATE TABLE MONEY_BUD( _id INTEGER PRIMARY KEY AUTOINCREMENT, budget INTEGER, period INTEGER);");
-                dbBudget.insert("insert into MONEY_BUD values(null, "+50000+", "+5+");");
+                dbBudget.createTable("CREATE TABLE MONEY_BUD( _id INTEGER PRIMARY KEY AUTOINCREMENT, budget INTEGER, " +
+                        "period INTEGER, date INTEGER, " + "day INTEGER, recommend INTEGER);");
+                dbBudget.insert("insert into MONEY_BUD values(null, "+50000+", "+5+", "+20000101+", "+0+", "+0+");");
 
                 intent = new Intent().setClass(this, budget_view.class);
                 spec = mTabHost.newTabSpec("tab3").setIndicator("예산").setContent(intent);

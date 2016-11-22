@@ -1,15 +1,14 @@
 package com.example.sunwo.money_book;
 
-import android.app.TabActivity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TabHost;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Date;
 
 public class budget_new extends AppCompatActivity {
 
@@ -35,7 +34,10 @@ public class budget_new extends AppCompatActivity {
                     toast.show();
                 }
                 else{
-                    dbBudget.insert("insert into MONEY_BUD values(null, "+budget+", "+period+");");
+                    Date currentTime = new Date( );
+                    int now = dbBudget.DatetoInt(currentTime);
+
+                    dbBudget.insert("insert into MONEY_BUD values(null, "+budget+", "+period+", "+now+", "+0+", "+0+");");
                     Intent intent = new Intent(budget_new.this, MainActivity.class);
                     startActivity(intent);
                 }
