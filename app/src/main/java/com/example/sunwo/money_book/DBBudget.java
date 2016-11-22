@@ -75,17 +75,6 @@ public class DBBudget extends SQLiteOpenHelper {
         return str;
     }
 
-    public int getBudget() {
-        SQLiteDatabase db = getReadableDatabase();
-        int budget = 0;
-
-        Cursor cursor = db.rawQuery("select * from MONEY_BUD", null);
-        cursor.moveToNext();
-        cursor.moveToNext();
-        budget = cursor.getInt(1);
-        return budget;
-    }
-
     public int getBid() {
         SQLiteDatabase db = getReadableDatabase();
         int bid = 0;
@@ -94,27 +83,22 @@ public class DBBudget extends SQLiteOpenHelper {
         while(countT.moveToNext()){
             bid = countT.getInt(0);
         }
-        if(bid == 1){
+        if(bid == 1)
             return -1;
-        }
-        else {
-      /*      Cursor cursor = db.rawQuery("select * from MONEY_BUD", null);
-            cursor.moveToNext();
-            budget = cursor.getInt(0);
-            return budget; */
+        else
             return 2;
-        }
+
     }
 
-    public int getRecommend() {
+    public int getData(int index) {
         SQLiteDatabase db = getReadableDatabase();
-        int recommend = 0;
+        int data = 0;
 
         Cursor cursor = db.rawQuery("select * from MONEY_BUD", null);
         cursor.moveToNext();
         cursor.moveToNext();
-        recommend = cursor.getInt(5);
-        return recommend;
+        data = cursor.getInt(index);
+        return data;
     }
 
     public int DatetoInt(Date date) {

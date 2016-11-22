@@ -83,8 +83,8 @@ public class cat_exp extends AppCompatActivity {
                         dbExpense.insert("insert into MONEY_EX values(null, " + amount + ", '" + exCategory + "',"
                                 + dateInt + ", '"+exMethod+"' , '"+exDescription+"');");
                         exResult.setText(dbExpense.PrintData());
-                        int currentBudget = dbBudget.getBudget();
-                        int currentRecommend = dbBudget.getRecommend();
+                        int currentBudget = dbBudget.getData(1);
+                        int currentRecommend = dbBudget.getData(5);
                         int updatedBudget = currentBudget - Integer.parseInt(amount);
                         int updatedRecommend = currentRecommend - Integer.parseInt(amount);
                         dbBudget.update("update MONEY_BUD set budget = " + updatedBudget + " where _id = " + 2 + ";");

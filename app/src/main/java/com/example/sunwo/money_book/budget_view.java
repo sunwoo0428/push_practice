@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class budget_view extends AppCompatActivity {
@@ -23,7 +24,20 @@ public class budget_view extends AppCompatActivity {
             bdgResult.setText( dbBudget.PrintDataBudget() );
             recResult.setText( dbBudget.PrintDataRecommend() );
         }
+    }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        final DBBudget dbBudget = new DBBudget(getApplicationContext(), "money_bdg.db", null, 1);
+
+        final TextView bdgResult = (TextView) findViewById(R.id.total_bdg);
+        final TextView recResult = (TextView) findViewById(R.id.recommend_mny);
+
+        if(dbBudget.getBid()==2){
+            bdgResult.setText( dbBudget.PrintDataBudget() );
+            recResult.setText( dbBudget.PrintDataRecommend() );
+        }
 
         Button btnDropBdg = (Button) findViewById(R.id.btn_dropBdg);
         btnDropBdg.setOnClickListener(new View.OnClickListener() {
@@ -43,20 +57,28 @@ public class budget_view extends AppCompatActivity {
         });
 
 
-    }
+        ImageButton imgbtnPrevious = (ImageButton) findViewById(R.id.previous);
+        ImageButton imgbtnNext = (ImageButton) findViewById(R.id.next);
 
-    @Override
-    protected void onResume(){
-        super.onResume();
-        final DBBudget dbBudget = new DBBudget(getApplicationContext(), "money_bdg.db", null, 1);
+        imgbtnNext.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                dbBudget.update("update MONEY_BUD set day = day + 1 where _id = 2;");
+                int remaining = dbBudget.getData(1) / (dbBudget.getData(2) - dbBudget.getData(4));
+                dbBudget.update("update MONEY_BUD set recommend = " + remaining + " where _id = 2;");
+                bdgResult.setText( dbBudget.PrintDataBudget() );
+                recResult.setText( dbBudget.PrintDataRecommend() );
+            }
+        });
 
-        final TextView bdgResult = (TextView) findViewById(R.id.total_bdg);
-        final TextView recResult = (TextView) findViewById(R.id.recommend_mny);
-
-        if(dbBudget.getBid()==2){
-            bdgResult.setText( dbBudget.PrintDataBudget() );
-            recResult.setText( dbBudget.PrintDataRecommend() );
-        }
+        imgbtnPrevious.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                dbBudget.update("update MONEY_BUD set day = day - 1 where _id = 2;");
+                int remaining = dbBudget.getData(1) / (dbBudget.getData(2) - dbBudget.getData(4));
+                dbBudget.update("update MONEY_BUD set recommend = " + remaining + " where _id = 2;");
+                bdgResult.setText( dbBudget.PrintDataBudget() );
+                recResult.setText( dbBudget.PrintDataRecommend() );
+            }
+        });
     }
 
 
