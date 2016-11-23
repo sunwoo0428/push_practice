@@ -61,7 +61,6 @@ public class mainscreen extends AppCompatActivity {
         dbIncome = new DBIncome(getApplicationContext(), "money_in.db", null, 1);
 
         ListView listview1, listview2 ;
-        final TextView testing = (TextView)findViewById(R.id.notyet1);
         typeselected = (TextView)findViewById(R.id.type1);
         start_date = (TextView)findViewById(R.id.start_date);
         end_date = (TextView)findViewById(R.id.end_date);
@@ -75,6 +74,31 @@ public class mainscreen extends AppCompatActivity {
         listview1.setAdapter(adapter1);
         listview2 = (ListView)findViewById(R.id.listview2);
         listview2.setAdapter(adapter2);
+
+        final TextView oneDayExpense = (TextView)findViewById(R.id.day_expense);
+        final TextView sevenDayExpense = (TextView)findViewById(R.id.seven_expense);
+        final TextView oneMonthExpense = (TextView)findViewById(R.id.month_expense);
+
+        SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+        Date currentTime = new Date();
+        CurrentDate = mSimpleDateFormat.format(currentTime);
+        curryear = Integer.parseInt(CurrentDate.substring(0,4));
+        currmonth = Integer.parseInt(CurrentDate.substring(4,6));
+        currday = Integer.parseInt(CurrentDate.substring(6,8));
+
+        int expense1 = dbExpense.GetTotalExpense(CurrentDate);
+        int x=0;
+        dbExpense.get7DaysAgoDb(curryear,currmonth,currday,x);
+        String sevendaysago = dbExpense.days7db[0];
+        int expense7 = dbExpense.sevenDayExpense(sevendaysago,CurrentDate);
+        int expenseMonth = dbExpense.oneMonthExpense(curryear, currmonth,CurrentDate);
+
+        oneDayExpense.setText("1일 지출: "+expense1+"원");
+        sevenDayExpense.setText("7일 지출: "+expense7+"원");
+        oneMonthExpense.setText("한달 지출: "+expenseMonth+"원");
+
+
+
 
         Button btnSelect = (Button) findViewById(R.id.select_type);
         btnSelect.setOnClickListener(new View.OnClickListener() {
@@ -101,20 +125,32 @@ public class mainscreen extends AppCompatActivity {
         btnFind.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(type ==0){
+                    int tempyear, tempmonth, tempday;
+                    String date;
                     adapter1.deleteAll();
                     adapter2.deleteAll();
                     listViewCount = dbExpense.searchExpense(Date[0],Date[1]);
                     for(int i = 0;i<listViewCount;i++){
-                        adapter1.addItem(dbExpense.expenseStructs[i].getId(),dbExpense.expenseStructs[i].getAmount(), dbExpense.expenseStructs[i].getDate(),
+                        tempyear = Integer.parseInt(dbExpense.expenseStructs[i].getDate().substring(0,4));
+                        tempmonth = Integer.parseInt(dbExpense.expenseStructs[i].getDate().substring(4,6));
+                        tempday = Integer.parseInt(dbExpense.expenseStructs[i].getDate().substring(6,8));
+                        date = tempyear+"년 "+tempmonth+"월 "+tempday+"일";
+                        adapter1.addItem(dbExpense.expenseStructs[i].getId(),dbExpense.expenseStructs[i].getAmount()+"원", date,
                                 dbExpense.expenseStructs[i].getCategory(), dbExpense.expenseStructs[i].getMethod(), dbExpense.expenseStructs[i].getDescription()) ;
                     }
                 }
                 else if(type == 1){
+                    int tempyear, tempmonth, tempday;
+                    String date;
                     adapter1.deleteAll();
                     adapter2.deleteAll();
                     listViewCount = dbIncome.searchIncome(Date[0],Date[1]);
                     for(int i = 0;i<listViewCount;i++){
-                        adapter2.addItem(dbIncome.incomeStructs[i].getId(),dbIncome.incomeStructs[i].getAmount(), dbIncome.incomeStructs[i].getDate(),
+                        tempyear = Integer.parseInt(dbExpense.expenseStructs[i].getDate().substring(0,4));
+                        tempmonth = Integer.parseInt(dbExpense.expenseStructs[i].getDate().substring(4,6));
+                        tempday = Integer.parseInt(dbExpense.expenseStructs[i].getDate().substring(6,8));
+                        date = tempyear+"년 "+tempmonth+"월 "+tempday+"일";
+                        adapter2.addItem(dbIncome.incomeStructs[i].getId(),dbIncome.incomeStructs[i].getAmount()+"원",date,
                                 dbIncome.incomeStructs[i].getCategory(), dbIncome.incomeStructs[i].getMethod(), dbIncome.incomeStructs[i].getDescription()) ;
                     }
                 }
@@ -131,20 +167,32 @@ public class mainscreen extends AppCompatActivity {
         btnRefresh.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(type ==0){
+                    int tempyear, tempmonth, tempday;
+                    String date;
                     adapter1.deleteAll();
                     adapter2.deleteAll();
                     listViewCount = dbExpense.searchExpense(Date[0],Date[1]);
                     for(int i = 0;i<listViewCount;i++){
-                        adapter1.addItem(dbExpense.expenseStructs[i].getId(),dbExpense.expenseStructs[i].getAmount(), dbExpense.expenseStructs[i].getDate(),
+                        tempyear = Integer.parseInt(dbExpense.expenseStructs[i].getDate().substring(0,4));
+                        tempmonth = Integer.parseInt(dbExpense.expenseStructs[i].getDate().substring(4,6));
+                        tempday = Integer.parseInt(dbExpense.expenseStructs[i].getDate().substring(6,8));
+                        date = tempyear+"년 "+tempmonth+"월 "+tempday+"일";
+                        adapter1.addItem(dbExpense.expenseStructs[i].getId(),dbExpense.expenseStructs[i].getAmount()+"원", date,
                                 dbExpense.expenseStructs[i].getCategory(), dbExpense.expenseStructs[i].getMethod(), dbExpense.expenseStructs[i].getDescription()) ;
                     }
                 }
                 else if(type == 1){
+                    int tempyear, tempmonth, tempday;
+                    String date;
                     adapter1.deleteAll();
                     adapter2.deleteAll();
                     listViewCount = dbIncome.searchIncome(Date[0],Date[1]);
                     for(int i = 0;i<listViewCount;i++){
-                        adapter2.addItem(dbIncome.incomeStructs[i].getId(),dbIncome.incomeStructs[i].getAmount(), dbIncome.incomeStructs[i].getDate(),
+                        tempyear = Integer.parseInt(dbExpense.expenseStructs[i].getDate().substring(0,4));
+                        tempmonth = Integer.parseInt(dbExpense.expenseStructs[i].getDate().substring(4,6));
+                        tempday = Integer.parseInt(dbExpense.expenseStructs[i].getDate().substring(6,8));
+                        date = tempyear+"년 "+tempmonth+"월 "+tempday+"일";
+                        adapter2.addItem(dbIncome.incomeStructs[i].getId(),dbIncome.incomeStructs[i].getAmount()+"원",date,
                                 dbIncome.incomeStructs[i].getCategory(), dbIncome.incomeStructs[i].getMethod(), dbIncome.incomeStructs[i].getDescription()) ;
                     }
                 }
@@ -152,6 +200,16 @@ public class mainscreen extends AppCompatActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), "지출 또는 수입을 선택하시오", Toast.LENGTH_SHORT);
                     toast.show();
                 }
+                int expense1 = dbExpense.GetTotalExpense(CurrentDate);
+                int x=0;
+                dbExpense.get7DaysAgoDb(curryear,currmonth,currday,x);
+                String sevendaysago = dbExpense.days7db[0];
+                int expense7 = dbExpense.sevenDayExpense(sevendaysago,CurrentDate);
+                int expenseMonth = dbExpense.oneMonthExpense(curryear, currmonth,CurrentDate);
+
+                oneDayExpense.setText("1일 지출: "+expense1+"원");
+                sevenDayExpense.setText("7일 지출: "+expense7+"원");
+                oneMonthExpense.setText("한달 지출: "+expenseMonth+"원");
                 adapter1.notifyDataSetChanged();
                 adapter2.notifyDataSetChanged();
             }
@@ -168,6 +226,17 @@ public class mainscreen extends AppCompatActivity {
                 alert(description);
             }
         }) ;
+        listview1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView parent, View v, int position, long id) {
+                parent1 = parent;
+                position1  = position;
+                Listview_expense item = (Listview_expense) parent.getItemAtPosition(position) ;
+                String description = item.getDescription();
+                alertLong(description);
+                return true;
+            }
+        }) ;
 
         listview2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -179,10 +248,33 @@ public class mainscreen extends AppCompatActivity {
                 alert(description);
             }
         }) ;
+        listview2.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView parent, View v, int position, long id) {
+                parent2 = parent;
+                position2  = position;
+                Listview_income item = (Listview_income) parent.getItemAtPosition(position) ;
+                String description = item.getDescription();
+                alertLong(description);
+                return true;
+            }
+        }) ;
 
     }
 
     private void alert(String message) {
+        new AlertDialog.Builder(this)
+                .setTitle("상세설명")
+                .setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("확인", new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
+    }
+
+    private void alertLong(String message) {
         new AlertDialog.Builder(this)
                 .setTitle("상세설명")
                 .setMessage(message)
@@ -258,12 +350,6 @@ public class mainscreen extends AppCompatActivity {
     }
 
     protected Dialog onCreateDialog(final int id){
-        SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
-        Date currentTime = new Date();
-        CurrentDate = mSimpleDateFormat.format(currentTime);
-        curryear = Integer.parseInt(CurrentDate.substring(0,4));
-        currmonth = Integer.parseInt(CurrentDate.substring(4,6));
-        currday = Integer.parseInt(CurrentDate.substring(6,8));
         DatePickerDialog dpd = new DatePickerDialog(mainscreen.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

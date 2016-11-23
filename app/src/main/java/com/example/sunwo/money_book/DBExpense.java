@@ -78,6 +78,25 @@ public class DBExpense extends SQLiteOpenHelper {
         return str;
     }
 
+    public int sevenDayExpense(String startDate, String endDate){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from MONEY_EX where date >= '"+startDate+"' and date <='"+ endDate+"'", null);
+        int Expense7 = 0;
+        while(cursor.moveToNext()){
+            Expense7 += cursor.getInt(1);
+        }
+        return Expense7;
+    }
+    public int oneMonthExpense(int year, int month, String currentDate){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from MONEY_EX where date >= "+year+month+"00 and date <='"+ currentDate+"'", null);
+        int ExpenseMonth = 0;
+        while(cursor.moveToNext()){
+            ExpenseMonth += cursor.getInt(1);
+        }
+        return ExpenseMonth;
+    }
+
     public int searchExpense(int startDate, int endDate){
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("select * from MONEY_EX where date >= "+startDate+" and date <="+ endDate+"", null);
@@ -132,7 +151,7 @@ public class DBExpense extends SQLiteOpenHelper {
             Calendar cal = Calendar
                     .getInstance();
             cal.set(year, month-1, day);
-            cal.add(Calendar.DATE, -i-7*k+1);
+            cal.add(Calendar.DATE, -i-7*k);
 
             java.util.Date weekago = cal.getTime();
             SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd",
@@ -150,7 +169,7 @@ public class DBExpense extends SQLiteOpenHelper {
                     .getInstance();
             cal.set(year, month-1, day);
 
-            cal.add(Calendar.DATE, -i-7*k+1);
+            cal.add(Calendar.DATE, -i-7*k);
 
             java.util.Date weekago = cal.getTime();
             SimpleDateFormat formatter = new SimpleDateFormat("MM/dd",
