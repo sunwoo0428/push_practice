@@ -25,7 +25,6 @@ public class statistic_cir extends AppCompatActivity {
         setContentView(R.layout.activity_statistic_cir);
         LinearLayout dynamicLayout = (LinearLayout) findViewById(R.id.chart);
 
-
         //차트를 출력하는 뷰객체(ChartView) 생성
         mChartView = new ChartView(this);
 

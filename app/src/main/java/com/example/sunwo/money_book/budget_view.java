@@ -60,6 +60,7 @@ public class budget_view extends AppCompatActivity {
                 dbBudget.update("update MONEY_BUD set day = day + 1 where _id = 2;");
                 int remaining = dbBudget.getData(6) / (dbBudget.getData(2) - dbBudget.getData(4));
                 dbBudget.update("update MONEY_BUD set recommend = " + remaining + " where _id = 2;");
+                dbBudget.update("update MONEY_BUD set remain_recommend = " + remaining + " where _id = 2;");
                 bdgResult.setText( dbBudget.PrintDataBudget() );
                 recResult.setText( dbBudget.PrintDataRecommend(5) );
             }
@@ -70,10 +71,12 @@ public class budget_view extends AppCompatActivity {
                 dbBudget.update("update MONEY_BUD set day = day - 1 where _id = 2;");
                 int remaining = dbBudget.getData(6) / (dbBudget.getData(2) - dbBudget.getData(4));
                 dbBudget.update("update MONEY_BUD set recommend = " + remaining + " where _id = 2;");
+                dbBudget.update("update MONEY_BUD set remain_recommend = " + remaining + " where _id = 2;");
                 bdgResult.setText( dbBudget.PrintDataBudget() );
                 recResult.setText( dbBudget.PrintDataRecommend(5) );
             }
         });
+
     }
 
 }

@@ -1,16 +1,25 @@
-<LinearLayout
+<RelativeLayout
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/budget_new"
     android:padding="50dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"><![CDATA[
+        
+
+
+
+    ]]>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/insertBudget"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:layout_marginTop="117dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
          <EditText
         android:id="@+id/et_budget"
         android:layout_width="0dp"
@@ -27,9 +36,14 @@
         android:inputType="number"
         android:hint="기간" />
     </LinearLayout>
-            <Button
-        android:id="@+id/btn_insertBdg"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="예산 추가"/>
-</LinearLayout>
+
+    <Button
+    android:id="@+id/btn_insertBdg"
+    android:background="#00000000"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="예산 추가"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/insertBudget"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
