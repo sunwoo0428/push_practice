@@ -82,7 +82,7 @@ public class cat_exp extends AppCompatActivity {
                 exDescription = Des.getText().toString();
             }
         });
-
+        //testing
         Button btnInsertEx = (Button) findViewById(R.id.btn_exInsert);
         btnInsertEx.setOnClickListener(new View.OnClickListener() {
 
