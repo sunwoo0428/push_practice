@@ -1,0 +1,111 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/text"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:weightSum="1"
+        android:background="@drawable/border">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_weight="1"
+                android:text="지출합계"/>
+            <TextView
+                android:id="@+id/sum"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="XXXXXXXXX"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="73dp"
+                android:layout_weight="1"
+                android:text="지출평균"/>
+
+            <TextView
+                android:id="@+id/avg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="XXXXXXXXX"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/chart"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/border_1"
+        >
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/button"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2.4"
+        android:background="@drawable/border"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:id="@+id/backward"
+                android:layout_gravity="left"
+                android:onClick="onButtonbackClicked"
+                android:background="@drawable/arrow_yellow2"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:weightSum="1"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:id="@+id/forward"
+                android:layout_gravity="right"
+                android:onClick="onButtonforwardClicked"
+                android:background="@drawable/arrow_yellow" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
