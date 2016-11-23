@@ -13,7 +13,6 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 
-
 public class MainActivity extends TabActivity {
 
     public static Context context;
