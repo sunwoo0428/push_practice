@@ -4,8 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/achartengine-1.1.00/achartengine-1.1.00.iml" filepath="$PROJECT_DIR$/achartengine-1.1.00/achartengine-1.1.00.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/push_practice-practice_branching.iml" filepath="$PROJECT_DIR$/push_practice-practice_branching.iml" />
-      <module fileurl="file://$PROJECT_DIR$/se_project.iml" filepath="$PROJECT_DIR$/se_project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/money_book_final.iml" filepath="$PROJECT_DIR$/money_book_final.iml" />
     </modules>
   </component>
 </project>

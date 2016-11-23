@@ -36,6 +36,7 @@ public class change_exp extends AppCompatActivity {
     int exDay = 0;
     String CurrentDate = "";
     int curryear = 0, currmonth=0,currday=0;
+    int practicingMerge=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
