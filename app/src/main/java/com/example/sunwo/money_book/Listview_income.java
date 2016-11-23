@@ -11,9 +11,11 @@ public class Listview_income {
     private String method;
     private String description;
 
+
     public void setI_id(String i_id) {
         this.i_id = i_id;
     }
+
     public void setIncome(String income) {
         this.income = income;
     }
@@ -58,7 +60,6 @@ public class Listview_income {
     public String getI_id() {
         return i_id;
     }
-
 
 
 

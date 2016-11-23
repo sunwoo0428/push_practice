@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+
 public class cat_exp extends AppCompatActivity {
 
     final int DIALOG_DATE = 1;
@@ -35,6 +36,7 @@ public class cat_exp extends AppCompatActivity {
     int exDay = 0;
     String CurrentDate = "";
     int curryear = 0, currmonth=0,currday=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +91,12 @@ public class cat_exp extends AppCompatActivity {
                         dbExpense.insert("insert into MONEY_EX values(null, " + amount + ", '" + exCategory + "',"
                                 + dateInt + ", '"+exMethod+"' , '"+exDescription+"');");
                         exResult.setText(dbExpense.PrintData());
-                        int currentBudget = dbBudget.getBudget();
+                        int currentBudget = dbBudget.getData(6);
+                        int currentRecommend = dbBudget.getData(7);
                         int updatedBudget = currentBudget - Integer.parseInt(amount);
-                        dbBudget.update("update MONEY_BUD set budget = " + updatedBudget + " where _id = " + 2 + ";");
+                        int updatedRecommend = currentRecommend - Integer.parseInt(amount);
+                        dbBudget.update("update MONEY_BUD set remain_budget = " + updatedBudget + " where _id = " + 2 + ";");
+                        dbBudget.update("update MONEY_BUD set remain_recommend = " + updatedRecommend + " where _id = " + 2 + ";");
                         onBackPressed();
                     }
                     else if(dbBudget.getBid()==-1){ //예산 없을때 구현 어떻게 하지?ㄷㄷㄷ

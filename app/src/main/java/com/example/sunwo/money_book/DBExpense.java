@@ -111,6 +111,7 @@ public class DBExpense extends SQLiteOpenHelper {
             String tempDate = String.valueOf(cursor.getInt(3));
 
             expenseStructs[count].setId(tempId);
+
             expenseStructs[count].setAmount(tempAmount);
             expenseStructs[count].setCategory(cursor.getString(2));
             expenseStructs[count].setDate(tempDate);
@@ -153,6 +154,7 @@ public class DBExpense extends SQLiteOpenHelper {
             cal.set(year, month-1, day);
             cal.add(Calendar.DATE, -i-7*k);
 
+
             java.util.Date weekago = cal.getTime();
             SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd",
                     Locale.getDefault());
@@ -168,7 +170,6 @@ public class DBExpense extends SQLiteOpenHelper {
             Calendar cal = Calendar
                     .getInstance();
             cal.set(year, month-1, day);
-
             cal.add(Calendar.DATE, -i-7*k);
 
             java.util.Date weekago = cal.getTime();

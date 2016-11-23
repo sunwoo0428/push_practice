@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -57,6 +58,7 @@ public class mainscreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainscreen);
 
+
         dbExpense = new DBExpense(getApplicationContext(), "money_ex.db", null, 1);
         dbIncome = new DBIncome(getApplicationContext(), "money_in.db", null, 1);
 
@@ -96,7 +98,6 @@ public class mainscreen extends AppCompatActivity {
         oneDayExpense.setText("1일 지출: "+expense1+"원");
         sevenDayExpense.setText("7일 지출: "+expense7+"원");
         oneMonthExpense.setText("한달 지출: "+expenseMonth+"원");
-
 
 
 
@@ -226,6 +227,7 @@ public class mainscreen extends AppCompatActivity {
                 alert(description);
             }
         }) ;
+
         listview1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView parent, View v, int position, long id) {
@@ -326,6 +328,7 @@ public class mainscreen extends AppCompatActivity {
                 .show();
     }
 
+
     private void DialogSelectType() {
         final String items[] = { "지출", "수입" };
         AlertDialog.Builder ab = new AlertDialog.Builder(mainscreen.this);
@@ -335,11 +338,13 @@ public class mainscreen extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         type = whichButton;
                         typeString[0] = items[type];
+
                     }
                 }).setPositiveButton("Ok",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         typeselected.setText(typeString[0]);
+
                     }
                 }).setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {
@@ -378,8 +383,6 @@ public class mainscreen extends AppCompatActivity {
                     end_date.setText(dateTemp[1]);
             }
         },curryear,currmonth-1,currday);
-
-
         return dpd;
     }
 

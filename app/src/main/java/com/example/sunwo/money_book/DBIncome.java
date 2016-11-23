@@ -88,6 +88,7 @@ public class DBIncome extends SQLiteOpenHelper {
             String tempAmount = String.valueOf(cursor.getInt(1));
             String tempDate = String.valueOf(cursor.getInt(3));
             incomeStructs[count].setId(tempId);
+
             incomeStructs[count].setAmount(tempAmount);
             incomeStructs[count].setCategory(cursor.getString(2));
             incomeStructs[count].setDate(tempDate);

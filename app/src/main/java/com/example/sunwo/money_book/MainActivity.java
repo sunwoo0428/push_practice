@@ -13,6 +13,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 
+
 public class MainActivity extends TabActivity {
 
     public static Context context;
@@ -39,6 +40,7 @@ public class MainActivity extends TabActivity {
 
         intent = new Intent().setClass(this, inc_exp.class);
         spec = mTabHost.newTabSpec("tab1").setIndicator("입력").setContent(intent);
+
         mTabHost.addTab(spec);
 
         intent = new Intent().setClass(this, statistic.class);
@@ -63,10 +65,11 @@ public class MainActivity extends TabActivity {
                 dbIncome.createTable("CREATE TABLE MONEY_IN( _id INTEGER PRIMARY KEY AUTOINCREMENT, income INTEGER, category TEXT," +
                         " date INTEGER, paymentMethod TEXT, description TEXT);");
                 dbBudget.drop("DROP TABLE IF EXISTS MONEY_BUD");
-                dbBudget.createTable("CREATE TABLE MONEY_BUD( _id INTEGER PRIMARY KEY AUTOINCREMENT, budget INTEGER, period INTEGER);");
-                dbBudget.insert("insert into MONEY_BUD values(null, "+1+", "+1+");");
+                dbBudget.createTable("CREATE TABLE MONEY_BUD( _id INTEGER PRIMARY KEY AUTOINCREMENT, total_budget INTEGER, " +
+                        "period INTEGER, date INTEGER, day INTEGER, recommend INTEGER, remain_budget INTEGER, remain_recommend);");
+                dbBudget.insert("insert into MONEY_BUD values(null, 50000, 5, 20000101, 0, 0, 0, 0);");
 
-                intent = new Intent().setClass(this, budget_view.class);
+                intent = new Intent().setClass(this, budget_new.class);
                 spec = mTabHost.newTabSpec("tab3").setIndicator("예산").setContent(intent);
                 mTabHost.addTab(spec);
             }
@@ -109,6 +112,7 @@ public class MainActivity extends TabActivity {
                 mTabHost.getTabWidget().getChildTabViewAt(mTabHost.getCurrentTab()).setBackgroundColor(Color.parseColor("#6666FF"));
             }
         });
+
 
         if(temp.count == 0) {
             mTabHost.setCurrentTab(0);

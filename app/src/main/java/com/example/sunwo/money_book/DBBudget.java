@@ -5,6 +5,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+
 public class DBBudget extends SQLiteOpenHelper {
 
     public DBBudget(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -14,7 +19,10 @@ public class DBBudget extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // 새로운 테이블을 생성한다.
         // cr)eate table 테이블명 (컬럼명 타입 옵션;
-        db.execSQL("CREATE TABLE MONEY_BUD( _id INTEGER PRIMARY KEY AUTOINCREMENT, budget INTEGER, period INTEGER);");
+
+        db.execSQL("CREATE TABLE MONEY_BUD( _id INTEGER PRIMARY KEY AUTOINCREMENT, budget INTEGER, " +
+                "period INTEGER, date INTEGER, day INTEGER, recommend INTEGER, remain_total, remain_recommend);");
+
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -56,30 +64,27 @@ public class DBBudget extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("select * from MONEY_BUD", null);
         cursor.moveToNext();
         cursor.moveToNext();
-        str =  " Total Budget = "+ cursor.getInt(1) + "\n";
+
+        int now_budget = cursor.getInt(6);
+        float temp = cursor.getFloat(6)/cursor.getFloat(1) * 100;
+        String percentage = String.format("%.1f", temp);
+        str =  " 총 남은 돈 : "+ now_budget + " 원  (" + percentage + "%)\n";
         return str;
     }
-    public String PrintDataRecommend() {
+    public String PrintDataRecommend(int index) {
+
         SQLiteDatabase db = getReadableDatabase();
         String str = "";
 
         Cursor cursor = db.rawQuery("select * from MONEY_BUD", null);
         cursor.moveToNext();
         cursor.moveToNext();
-            str =  " Recommended usage = "
-                    + cursor.getInt(1)/cursor.getInt(2) + "\n";
+
+        float temp = cursor.getFloat(7)/cursor.getFloat(5) * 100;
+        String percentage = String.format("%.1f", temp);
+            str =  " 오늘의 돈 : "
+                    + cursor.getInt(index) + " 원 (" + percentage + "%)\n";
         return str;
-    }
-
-    public int getBudget() {
-        SQLiteDatabase db = getReadableDatabase();
-        int budget = 0;
-
-        Cursor cursor = db.rawQuery("select * from MONEY_BUD", null);
-        cursor.moveToNext();
-        cursor.moveToNext();
-        budget = cursor.getInt(1);
-        return budget;
     }
 
     public int getBid() {
@@ -90,32 +95,30 @@ public class DBBudget extends SQLiteOpenHelper {
         while(countT.moveToNext()){
             bid = countT.getInt(0);
         }
-        if(bid == 1){
+        if(bid == 1)
             return -1;
-        }
-        else {
-      /*      Cursor cursor = db.rawQuery("select * from MONEY_BUD", null);
-            cursor.moveToNext();
-            budget = cursor.getInt(0);
-            return budget; */
+        else
             return 2;
-        }
+
     }
 
-    public String PrintDataTesting() {
+    public int getData(int index) {
         SQLiteDatabase db = getReadableDatabase();
-        String str = "";
+        int data = 0;
 
         Cursor cursor = db.rawQuery("select * from MONEY_BUD", null);
-        while(cursor.moveToNext()) {
-            str += cursor.getInt(0)
-                    + " : bid "
-                    + cursor.getInt(1)
-                    + ", budget = "
-                    + cursor.getInt(2)
-                    + ", period = "
-                    + "\n";
-        }
-        return str;
+        cursor.moveToNext();
+        cursor.moveToNext();
+        data = cursor.getInt(index);
+        return data;
     }
+
+    public int DatetoInt(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+        String dTime = formatter.format(date);
+        int result = Integer.parseInt(dTime);
+
+        return result;
+    }
+
 }

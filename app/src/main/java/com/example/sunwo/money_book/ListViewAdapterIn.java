@@ -62,6 +62,7 @@ public class ListViewAdapterIn extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
+
     public void addItem(String id,String expense, String date, String category, String method, String description) {
         Listview_income item = new Listview_income();
         item.setI_id(id);
@@ -73,7 +74,6 @@ public class ListViewAdapterIn extends BaseAdapter {
 
         listViewItemIn.add(item);
     }
-
     public void deleteAll(){
         listViewItemIn.clear();
     }

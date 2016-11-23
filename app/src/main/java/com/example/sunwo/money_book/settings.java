@@ -1,12 +1,11 @@
 package com.example.sunwo.money_book;
 
 import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-
-import android.widget.Toast;
-
 import android.widget.Toast;
 
 public class settings extends AppCompatActivity {
@@ -32,10 +31,11 @@ public class settings extends AppCompatActivity {
                 dbIncome.drop("DROP TABLE IF EXISTS MONEY_IN");
                 dbIncome.createTable("CREATE TABLE MONEY_IN( _id INTEGER PRIMARY KEY AUTOINCREMENT, income INTEGER, category TEXT, date INTEGER," +
                         "incomeMethod TEXT, description TEXT);");
-
                 dbBudget.drop("DROP TABLE IF EXISTS MONEY_BUD");
-                dbBudget.createTable("CREATE TABLE MONEY_BUD( _id INTEGER PRIMARY KEY AUTOINCREMENT, budget INTEGER, period INTEGER);");
-                dbBudget.insert("insert into MONEY_BUD values(null, "+50000+", "+5+");");
+                dbBudget.createTable("CREATE TABLE MONEY_BUD( _id INTEGER PRIMARY KEY AUTOINCREMENT, budget INTEGER, " +
+                        "period INTEGER, date INTEGER, day INTEGER, recommend INTEGER, remain_budget INTEGER, remain_recommend INTEGER);");
+                dbBudget.insert("insert into MONEY_BUD values(null, 50000, 5, 20000101, 0, 0, 0, 0);");
+
 
                 Toast toast = Toast.makeText(getApplicationContext(), "초기화 되었습니다.", Toast.LENGTH_SHORT);
                 toast.show();

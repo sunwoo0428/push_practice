@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/achartengine-1.1.00/achartengine-1.1.00.iml" filepath="$PROJECT_DIR$/achartengine-1.1.00/achartengine-1.1.00.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/push_practice-practice_branching.iml" filepath="$PROJECT_DIR$/push_practice-practice_branching.iml" />
+      <module fileurl="file://$PROJECT_DIR$/se_project.iml" filepath="$PROJECT_DIR$/se_project.iml" />
+    </modules>
+  </component>
+</project>

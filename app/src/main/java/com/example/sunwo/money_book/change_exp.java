@@ -92,9 +92,12 @@ public class change_exp extends AppCompatActivity {
                     dbExpense.update("update MONEY_EX set date="+dateInt+" where _id ='"+id+"';");
                     dbExpense.update("update MONEY_EX set paymentMethod='"+exMethod+"' where _id ='"+id+"';");
                     dbExpense.update("update MONEY_EX set description='"+exDescription+"' where _id ='"+id+"';");
-                    int currentBudget = dbBudget.getBudget();
+                    int currentBudget = dbBudget.getData(6);
+                    int currentRecommend = dbBudget.getData(7);
                     int updatedBudget = currentBudget - Integer.parseInt(changedMoney.getText().toString());
-                    dbBudget.update("update MONEY_BUD set budget = " + updatedBudget + " where _id = " + 2 + ";");
+                    int updatedRecommend = currentRecommend - Integer.parseInt(changedMoney.getText().toString());
+                    dbBudget.update("update MONEY_BUD set remain_budget = " + updatedBudget + " where _id = " + 2 + ";");
+                    dbBudget.update("update MONEY_BUD set remain_recommend = " + updatedRecommend + " where _id = " + 2 + ";");
                 }
                 else if(dbBudget.getBid()==-1){ //예산 없을때 구현 어떻게 하지?ㄷㄷㄷ
                     dbExpense.update("update MONEY_EX set expense='"+changedMoney.getText().toString()+"' where _id ='"+id+"';");

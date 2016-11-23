@@ -41,6 +41,7 @@ public class ExpenseStruct {
         return id;
     }
 
+
     public String getAmount() {
 
         return amount;
@@ -61,6 +62,7 @@ public class ExpenseStruct {
     public String getDescription() {
         return description;
     }
+
 
     public ExpenseStruct(String id, String amount, String date, String category, String method, String description) {
         this.id = id;

@@ -39,6 +39,7 @@ public class IncomeStruct {
         return id;
     }
 
+
     public String getAmount() {
 
         return amount;

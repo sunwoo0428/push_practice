@@ -36,6 +36,7 @@ public class cat_inc extends AppCompatActivity {
     String CurrentDate = "";
     int curryear = 0, currmonth=0,currday=0;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,6 +155,7 @@ public class cat_inc extends AppCompatActivity {
         curryear = Integer.parseInt(CurrentDate.substring(0,4));
         currmonth = Integer.parseInt(CurrentDate.substring(4,6));
         currday = Integer.parseInt(CurrentDate.substring(6,8));
+
         DatePickerDialog dpd = new DatePickerDialog(cat_inc.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

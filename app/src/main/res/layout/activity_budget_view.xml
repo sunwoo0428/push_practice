@@ -1,28 +1,59 @@
-<LinearLayout
+
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/budget_view"
-    android:padding="100dp"
+
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <TextView
-    android:id="@+id/total_bdg"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="예산"/>
+    <Button
+        android:id="@+id/btn_dropBdg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="예산 삭제"
+        android:layout_marginBottom="154dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
-        <TextView
-    android:id="@+id/recommend_mny"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="하루 권장 사용량"/>
+    <TextView
+        android:id="@+id/total_bdg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="예산"
+        android:layout_marginBottom="50dp"
+        android:layout_above="@+id/recommend_mny"
+        android:layout_alignLeft="@+id/previous"
+        android:layout_alignStart="@+id/previous" />
 
-        <Button
-    android:id="@+id/btn_dropBdg"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="예산 삭제"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_alignTop="@+id/btn_dropBdg"
+        android:layout_toRightOf="@+id/btn_dropBdg"
+        android:layout_toEndOf="@+id/btn_dropBdg"
+        android:layout_marginTop="58dp"
+        android:id="@+id/next" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:id="@+id/previous"
+        android:layout_alignTop="@+id/next"
+        android:layout_toLeftOf="@+id/btn_dropBdg"
+        android:layout_toStartOf="@+id/btn_dropBdg" />
+
+    <TextView
+        android:id="@+id/recommend_mny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="하루 권장 사용량"
+        android:layout_marginBottom="49dp"
+        android:layout_above="@+id/btn_dropBdg"
+        android:layout_alignLeft="@+id/total_bdg"
+        android:layout_alignStart="@+id/total_bdg" />
 
 
-</LinearLayout>
+</RelativeLayout>
