@@ -6,9 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TabHost;
+import android.widget.TextView;
+
+
 
 public class MainActivity extends TabActivity {
 
@@ -27,14 +31,16 @@ public class MainActivity extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Resources res = getResources();
-        TabHost mTabHost = getTabHost();
+        final TabHost mTabHost = getTabHost();
+
 
         intent = new Intent().setClass(this, mainscreen.class);
-        spec = mTabHost.newTabSpec("tab0").setIndicator("메인화면").setContent(intent);
+        spec = mTabHost.newTabSpec("tab0").setIndicator("조회").setContent(intent);
         mTabHost.addTab(spec);
 
         intent = new Intent().setClass(this, inc_exp.class);
-        spec = mTabHost.newTabSpec("tab1").setIndicator("수입지출").setContent(intent);
+        spec = mTabHost.newTabSpec("tab1").setIndicator("입력").setContent(intent);
+
         mTabHost.addTab(spec);
 
         intent = new Intent().setClass(this, statistic.class);
@@ -90,6 +96,23 @@ public class MainActivity extends TabActivity {
         intent = new Intent().setClass(this, settings.class);
         spec = mTabHost.newTabSpec("tab4").setIndicator("설정").setContent(intent);
         mTabHost.addTab(spec);
+
+        mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+          //      mTabHost.getTabWidget().getChildTabViewAt(1).setBackgroundColor(Color.parseColor("#0000BB"));
+                for(int i = 0; i<mTabHost.getTabWidget().getTabCount();i++){
+                    TextView tv = (TextView)mTabHost.getTabWidget().getChildTabViewAt(i).findViewById(android.R.id.title);
+                    tv.setTextColor(Color.parseColor("#FFFFFF"));
+                    mTabHost.getTabWidget().getChildTabViewAt(i).setBackgroundColor(Color.parseColor("#0000BB"));
+                }
+
+                TextView tp = (TextView)mTabHost.getTabWidget().getChildTabViewAt(mTabHost.getCurrentTab()).findViewById(android.R.id.title);
+                tp.setTextColor(Color.parseColor("#FFFFFF"));
+                mTabHost.getTabWidget().getChildTabViewAt(mTabHost.getCurrentTab()).setBackgroundColor(Color.parseColor("#6666FF"));
+            }
+        });
+
 
         if(temp.count == 0) {
             mTabHost.setCurrentTab(0);

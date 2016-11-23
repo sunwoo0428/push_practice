@@ -18,12 +18,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-
-public class cat_exp extends AppCompatActivity {
+public class change_exp extends AppCompatActivity {
 
     final int DIALOG_DATE = 1;
     EditText Des;
-    String amount="";
+    String id="";
+    EditText changedMoney;
     String exCategory="미등록";
     String exMethod = "미등록";
     String exDescription = "미등록";
@@ -37,22 +37,21 @@ public class cat_exp extends AppCompatActivity {
     String CurrentDate = "";
     int curryear = 0, currmonth=0,currday=0;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cat_exp);
+        setContentView(R.layout.activity_change_exp);
 
         final DBBudget dbBudget = new DBBudget(getApplicationContext(), "money_bdg.db", null, 1);
         final DBExpense dbExpense = new DBExpense(getApplicationContext(),"money_ex.db",null,1);
 
         Des = (EditText) findViewById(R.id.et_description);
+        changedMoney = (EditText) findViewById(R.id.et_amount);
+
 
         Intent intent = getIntent();
-        amount = (String)intent.getSerializableExtra("amount");
+        id = (String)intent.getSerializableExtra("e_id");
 
-        final TextView exResult = (TextView) findViewById(R.id.testingresult);
-        exResult.setText(amount); // data 넘어가는지 연습
 
         Button exDate = (Button) findViewById(R.id.btn_exDate);
         exDate.setOnClickListener(new View.OnClickListener() {
@@ -82,31 +81,34 @@ public class cat_exp extends AppCompatActivity {
                 exDescription = Des.getText().toString();
             }
         });
-        //testing
+
         Button btnInsertEx = (Button) findViewById(R.id.btn_exInsert);
         btnInsertEx.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                    if(dbBudget.getBid()==2){
-                        dbExpense.insert("insert into MONEY_EX values(null, " + amount + ", '" + exCategory + "',"
-                                + dateInt + ", '"+exMethod+"' , '"+exDescription+"');");
-                        exResult.setText(dbExpense.PrintData());
-                        int currentBudget = dbBudget.getData(6);
-                        int currentRecommend = dbBudget.getData(7);
-                        int updatedBudget = currentBudget - Integer.parseInt(amount);
-                        int updatedRecommend = currentRecommend - Integer.parseInt(amount);
-                        dbBudget.update("update MONEY_BUD set remain_budget = " + updatedBudget + " where _id = " + 2 + ";");
-                        dbBudget.update("update MONEY_BUD set remain_recommend = " + updatedRecommend + " where _id = " + 2 + ";");
-                        onBackPressed();
-                    }
-                    else if(dbBudget.getBid()==-1){ //예산 없을때 구현 어떻게 하지?ㄷㄷㄷ
-                        dbExpense.insert("insert into MONEY_EX values(null, " + amount + ", '" + exCategory + "',"
-                                +dateInt + ", '"+exMethod+"' , '"+exDescription+"');");
-                        exResult.setText(dbExpense.PrintData());
-                        Toast toast = Toast.makeText(getApplicationContext(), "등록된 예산이 없습니다", Toast.LENGTH_SHORT);
-                        toast.show();
-                        onBackPressed();
-                    }
+                if(dbBudget.getBid()==2){
+                    dbExpense.update("update MONEY_EX set expense='"+changedMoney.getText().toString()+"' where _id ='"+id+"';");
+                    dbExpense.update("update MONEY_EX set category='"+exCategory+"' where _id ='"+id+"';");
+                    dbExpense.update("update MONEY_EX set date="+dateInt+" where _id ='"+id+"';");
+                    dbExpense.update("update MONEY_EX set paymentMethod='"+exMethod+"' where _id ='"+id+"';");
+                    dbExpense.update("update MONEY_EX set description='"+exDescription+"' where _id ='"+id+"';");
+                    int currentBudget = dbBudget.getData(6);
+                    int currentRecommend = dbBudget.getData(7);
+                    int updatedBudget = currentBudget - Integer.parseInt(changedMoney.getText().toString());
+                    int updatedRecommend = currentRecommend - Integer.parseInt(changedMoney.getText().toString());
+                    dbBudget.update("update MONEY_BUD set remain_budget = " + updatedBudget + " where _id = " + 2 + ";");
+                    dbBudget.update("update MONEY_BUD set remain_recommend = " + updatedRecommend + " where _id = " + 2 + ";");
+                }
+                else if(dbBudget.getBid()==-1){ //예산 없을때 구현 어떻게 하지?ㄷㄷㄷ
+                    dbExpense.update("update MONEY_EX set expense='"+changedMoney.getText().toString()+"' where _id ='"+id+"';");
+                    dbExpense.update("update MONEY_EX set category='"+exCategory+"' where _id ='"+id+"';");
+                    dbExpense.update("update MONEY_EX set date="+dateInt+" where _id ='"+id+"';");
+                    dbExpense.update("update MONEY_EX set paymentMethod='"+exMethod+"' where _id ='"+id+"';");
+                    dbExpense.update("update MONEY_EX set description='"+exDescription+"' where _id ='"+id+"';");
+                    Toast toast = Toast.makeText(getApplicationContext(), "등록된 예산이 없습니다", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                onBackPressed();
             }
         });
 
@@ -121,7 +123,7 @@ public class cat_exp extends AppCompatActivity {
 
     private void DialogSelectOptionEx() {
         final String items[] = { "미등록", "음식", "의류", "교통비" };
-        AlertDialog.Builder ab = new AlertDialog.Builder(cat_exp.this);
+        AlertDialog.Builder ab = new AlertDialog.Builder(change_exp.this);
         ab.setTitle("카테고리");
         ab.setSingleChoiceItems(items, 0,
                 new DialogInterface.OnClickListener() {
@@ -144,7 +146,7 @@ public class cat_exp extends AppCompatActivity {
 
     private void DialogSelectOptionPayEx() {
         final String items[] = { "미등록", "카드", "현금", "통장" };
-        AlertDialog.Builder ab = new AlertDialog.Builder(cat_exp.this);
+        AlertDialog.Builder ab = new AlertDialog.Builder(change_exp.this);
         ab.setTitle("카테고리");
         ab.setSingleChoiceItems(items, 0,
                 new DialogInterface.OnClickListener() {
@@ -172,7 +174,7 @@ public class cat_exp extends AppCompatActivity {
         curryear = Integer.parseInt(CurrentDate.substring(0,4));
         currmonth = Integer.parseInt(CurrentDate.substring(4,6));
         currday = Integer.parseInt(CurrentDate.substring(6,8));
-        DatePickerDialog dpd = new DatePickerDialog(cat_exp.this, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog dpd = new DatePickerDialog(change_exp.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 //                Toast.makeText(getApplicationContext(),year+"년 "+(monthOfYear+1)+"월 "+dayOfMonth+ "일", Toast.LENGTH_SHORT).show();

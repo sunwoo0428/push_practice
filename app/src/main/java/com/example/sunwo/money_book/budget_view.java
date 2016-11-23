@@ -48,6 +48,7 @@ public class budget_view extends AppCompatActivity {
                 dbBudget.createTable("CREATE TABLE MONEY_BUD( _id INTEGER PRIMARY KEY AUTOINCREMENT, budget INTEGER, " +
                         "period INTEGER, date INTEGER, day INTEGER, recommend INTEGER, remain_budget INTEGER, remain_recommend INTEGER);");
                 dbBudget.insert("insert into MONEY_BUD values(null, 50000, 5, 20000101, 0, 0, 0, 0);");
+
                 bdgResult.setText("");
                 recResult.setText("");
 
@@ -74,6 +75,5 @@ public class budget_view extends AppCompatActivity {
             }
         });
     }
-
 
 }

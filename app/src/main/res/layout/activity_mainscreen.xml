@@ -4,32 +4,29 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/mainscreen"
-    android:padding="50dp"
+    android:padding="20dp"
+
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/weekly_expense"
+            android:id="@+id/day_expense"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:hint="weekly expense"/>
+            android:hint="1일 지출"/>
             <TextView
-        android:id="@+id/notyet1"
+        android:id="@+id/seven_expense"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:hint="몰라요"/>
+        android:hint="7일 지출"/>
             <TextView
-        android:id="@+id/monthly_expense"
+        android:id="@+id/month_expense"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:hint="monthly expense"/>
-            <TextView
-        android:id="@+id/notyet2"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:hint="몰라요"/>
+        android:hint="한달 지출"/>
     </LinearLayout>    
 
     <LinearLayout
@@ -60,6 +57,13 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="조회"/>
+        <Button
+            android:id="@+id/refresh"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="F5"/>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -88,12 +92,29 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/find2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:dividerHeight="4dp"
+        android:divider="#ffffff"
+        android:background="#ddefef"
         android:id="@+id/listview1">
+    </ListView>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="4dp"
+        android:divider="#ffffff"
+        android:background="#eeeeee"
+        android:id="@+id/listview2">
     </ListView>
 
 </LinearLayout>

@@ -51,7 +51,6 @@ public class statistic_lin extends AppCompatActivity {
         tempmonth = Integer.parseInt(CurrentDate.substring(4,6));
         tempday = Integer.parseInt(CurrentDate.substring(6,8));
         dbExpense.get7DaysAgoGraph(tempyear, tempmonth, tempday,k);
-        ;
         for(int i=0;i<9;i++)
             mMonth[i]=dbExpense.days7graph[i];
 
