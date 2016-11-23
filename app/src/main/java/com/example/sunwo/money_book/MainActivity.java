@@ -59,11 +59,11 @@ public class MainActivity extends TabActivity {
                 dbIncome.createTable("CREATE TABLE MONEY_IN( _id INTEGER PRIMARY KEY AUTOINCREMENT, income INTEGER, category TEXT," +
                         " date INTEGER, paymentMethod TEXT, description TEXT);");
                 dbBudget.drop("DROP TABLE IF EXISTS MONEY_BUD");
-                dbBudget.createTable("CREATE TABLE MONEY_BUD( _id INTEGER PRIMARY KEY AUTOINCREMENT, budget INTEGER, " +
-                        "period INTEGER, date INTEGER, " + "day INTEGER, recommend INTEGER);");
-                dbBudget.insert("insert into MONEY_BUD values(null, "+50000+", "+5+", "+20000101+", "+0+", "+0+");");
+                dbBudget.createTable("CREATE TABLE MONEY_BUD( _id INTEGER PRIMARY KEY AUTOINCREMENT, total_budget INTEGER, " +
+                        "period INTEGER, date INTEGER, day INTEGER, recommend INTEGER, remain_budget INTEGER, remain_recommend);");
+                dbBudget.insert("insert into MONEY_BUD values(null, 50000, 5, 20000101, 0, 0, 0, 0);");
 
-                intent = new Intent().setClass(this, budget_view.class);
+                intent = new Intent().setClass(this, budget_new.class);
                 spec = mTabHost.newTabSpec("tab3").setIndicator("예산").setContent(intent);
                 mTabHost.addTab(spec);
             }

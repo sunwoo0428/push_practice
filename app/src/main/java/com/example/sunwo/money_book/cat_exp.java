@@ -83,12 +83,12 @@ public class cat_exp extends AppCompatActivity {
                         dbExpense.insert("insert into MONEY_EX values(null, " + amount + ", '" + exCategory + "',"
                                 + dateInt + ", '"+exMethod+"' , '"+exDescription+"');");
                         exResult.setText(dbExpense.PrintData());
-                        int currentBudget = dbBudget.getData(1);
-                        int currentRecommend = dbBudget.getData(5);
+                        int currentBudget = dbBudget.getData(6);
+                        int currentRecommend = dbBudget.getData(7);
                         int updatedBudget = currentBudget - Integer.parseInt(amount);
                         int updatedRecommend = currentRecommend - Integer.parseInt(amount);
-                        dbBudget.update("update MONEY_BUD set budget = " + updatedBudget + " where _id = " + 2 + ";");
-                        dbBudget.update("update MONEY_BUD set recommend = " + updatedRecommend + " where _id = " + 2 + ";");
+                        dbBudget.update("update MONEY_BUD set remain_budget = " + updatedBudget + " where _id = " + 2 + ";");
+                        dbBudget.update("update MONEY_BUD set remain_recommend = " + updatedRecommend + " where _id = " + 2 + ";");
                     }
                     else if(dbBudget.getBid()==-1){ //예산 없을때 구현 어떻게 하지?ㄷㄷㄷ
                         dbExpense.insert("insert into MONEY_EX values(null, " + amount + ", '" + exCategory + "',"

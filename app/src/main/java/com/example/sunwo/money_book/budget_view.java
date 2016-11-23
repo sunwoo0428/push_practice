@@ -16,30 +16,28 @@ public class budget_view extends AppCompatActivity {
         setContentView(R.layout.activity_budget_view);
 
         final DBBudget dbBudget = new DBBudget(getApplicationContext(), "money_bdg.db", null, 1);
-
         final TextView bdgResult = (TextView) findViewById(R.id.total_bdg);
         final TextView recResult = (TextView) findViewById(R.id.recommend_mny);
 
-        if(dbBudget.getBid()==2){
-            bdgResult.setText( dbBudget.PrintDataBudget() );
-            recResult.setText( dbBudget.PrintDataRecommend() );
-        }
+        bdgResult.setText( dbBudget.PrintDataBudget() );
+        recResult.setText( dbBudget.PrintDataRecommend(5) );
+
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        final DBBudget dbBudget = new DBBudget(getApplicationContext(), "money_bdg.db", null, 1);
 
+        final DBBudget dbBudget = new DBBudget(getApplicationContext(), "money_bdg.db", null, 1);
         final TextView bdgResult = (TextView) findViewById(R.id.total_bdg);
         final TextView recResult = (TextView) findViewById(R.id.recommend_mny);
-
-        if(dbBudget.getBid()==2){
-            bdgResult.setText( dbBudget.PrintDataBudget() );
-            recResult.setText( dbBudget.PrintDataRecommend() );
-        }
-
         Button btnDropBdg = (Button) findViewById(R.id.btn_dropBdg);
+        ImageButton imgbtnPrevious = (ImageButton) findViewById(R.id.previous);
+        ImageButton imgbtnNext = (ImageButton) findViewById(R.id.next);
+
+        bdgResult.setText( dbBudget.PrintDataBudget() );
+        recResult.setText( dbBudget.PrintDataRecommend(7) );
+
         btnDropBdg.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -48,35 +46,31 @@ public class budget_view extends AppCompatActivity {
 
                 dbBudget.drop("DROP TABLE IF EXISTS MONEY_BUD");
                 dbBudget.createTable("CREATE TABLE MONEY_BUD( _id INTEGER PRIMARY KEY AUTOINCREMENT, budget INTEGER, " +
-                        "period INTEGER, date INTEGER, day INTEGER, recommend INTEGER);");
-                dbBudget.insert("insert into MONEY_BUD values(null, "+50000+", "+5+", "+20000101+", "+0+", "+0+");");
+                        "period INTEGER, date INTEGER, day INTEGER, recommend INTEGER, remain_budget INTEGER, remain_recommend INTEGER);");
+                dbBudget.insert("insert into MONEY_BUD values(null, 50000, 5, 20000101, 0, 0, 0, 0);");
                 bdgResult.setText("");
                 recResult.setText("");
 
             }
         });
 
-
-        ImageButton imgbtnPrevious = (ImageButton) findViewById(R.id.previous);
-        ImageButton imgbtnNext = (ImageButton) findViewById(R.id.next);
-
         imgbtnNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 dbBudget.update("update MONEY_BUD set day = day + 1 where _id = 2;");
-                int remaining = dbBudget.getData(1) / (dbBudget.getData(2) - dbBudget.getData(4));
+                int remaining = dbBudget.getData(6) / (dbBudget.getData(2) - dbBudget.getData(4));
                 dbBudget.update("update MONEY_BUD set recommend = " + remaining + " where _id = 2;");
                 bdgResult.setText( dbBudget.PrintDataBudget() );
-                recResult.setText( dbBudget.PrintDataRecommend() );
+                recResult.setText( dbBudget.PrintDataRecommend(5) );
             }
         });
 
         imgbtnPrevious.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 dbBudget.update("update MONEY_BUD set day = day - 1 where _id = 2;");
-                int remaining = dbBudget.getData(1) / (dbBudget.getData(2) - dbBudget.getData(4));
+                int remaining = dbBudget.getData(6) / (dbBudget.getData(2) - dbBudget.getData(4));
                 dbBudget.update("update MONEY_BUD set recommend = " + remaining + " where _id = 2;");
                 bdgResult.setText( dbBudget.PrintDataBudget() );
-                recResult.setText( dbBudget.PrintDataRecommend() );
+                recResult.setText( dbBudget.PrintDataRecommend(5) );
             }
         });
     }
